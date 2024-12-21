@@ -42,7 +42,7 @@ model = joblib.load("health_tips_model.pkl")
 vectorizer = joblib.load("vectorizer.pkl")
 
 # Example input for a new user
-new_user = {"user_id": "example_user_5", "age": 19, "bmi": 21, "condition": "healthy", "activity_level": "moderate"}
+new_user = {"user_id": "example_user_6", "age": 32, "bmi": 27, "condition": "Thyroid", "activity_level": "low"}
 new_user_vector = vectorizer.transform([new_user])
 
 # Predict health tip
