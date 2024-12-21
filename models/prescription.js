@@ -1,15 +1,26 @@
+// models/prescription.js
 const mongoose = require('mongoose');
 
 const prescriptionSchema = new mongoose.Schema({
-  user_id: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  medicines: [
+  user_id: {
+    type: mongoose.Schema.Types.ObjectId, // Reference to User model
+    required: true,
+    ref: 'User'
+  },
+  medications: [
     {
       name: { type: String, required: true },
       dosage: { type: String, required: true },
-      times_per_day: { type: Number, required: true },
-    },
+      frequency: { type: String, required: true }, // e.g., 'daily', 'twice a day', etc.
+    }
   ],
-  uploaded_at: { type: Date, default: Date.now },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-module.exports = mongoose.model('Prescription', prescriptionSchema);
+const Prescription = mongoose.model('Prescription', prescriptionSchema);
+
+module.exports = Prescription;
+

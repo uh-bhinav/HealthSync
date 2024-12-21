@@ -1,13 +1,18 @@
+// models/user.js
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  user_id: { type: String, required: true },
-  user_type: { type: String, enum: ['patient', 'doctor'], required: true },
-  phone_number: { type: String, required: true },
-  health_data: { type: Object },
-  prescriptions: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Prescription' }],
-  meal_schedule: { type: Object },
+  user_id: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  condition: { type: String, required: true },
+  activity_level: { type: String, required: true },
+  phone_number: { type: String, required: true, unique: true },
+  meals: { type: [String], required: true },
+  prescriptions: { type: [String] }
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+module.exports = User;
+
 
