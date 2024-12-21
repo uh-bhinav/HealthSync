@@ -1,15 +1,26 @@
 const mongoose = require('mongoose');
 require('dotenv').config();
 
-// MongoDB connection
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB Connected'))
-  .catch((err) => console.log(err));
+
+const uri = process.env.MONGO_URI; // Access the MongoDB URI from environment variables
+
+if (!uri) {
+  console.error("MongoDB URI is not defined in the .env file!");
+  process.exit(1);
+}
+
+mongoose.connect(uri)
+  .then(() => {
+    console.log('Connected to MongoDB successfully!');
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+  });
 
 const express = require('express');
-const User = require('models/user.js');
-const Prescription = require('models/prescription.js');
-const MealSchedule = require('models/meal_schedule.js');
+const User = require('./models/user');
+const Prescription = require('./models/prescription');
+const MealSchedule = require('./models/meal_schedule');
 
 const router = express.Router();
 
